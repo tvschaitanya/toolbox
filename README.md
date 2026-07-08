@@ -2,102 +2,32 @@
 
 A collection of shell scripts for managing and maintaining a macOS development environment.
 
-## Included Scripts
-
-### `app_list.sh`
-
-Generates a JSON inventory of installed software on your Mac.
-
-#### Detects
-
-- Mac App Store applications
-- Homebrew formulae
-- Homebrew casks
-- Manually installed applications
-- Development tools, including:
-  - Oh My Zsh
-  - NVM
-  - Node.js
-  - pyenv
-  - rbenv
-  - and others
-
-#### Output
-
-Creates a file in the current directory:
+## Project Structure
 
 ```text
-Apps_List_YYYYMMDD.json
-```
+toolbox/
+├── app_list.sh
+├── brew_update.sh
+├── aws_reset.sh
+└── README.md
+````
 
-#### Run
+| File             | Description                                                                                  |
+| ---------------- | -------------------------------------------------------------------------------------------- |
+| `app_list.sh`    | Generates a JSON inventory of installed applications and development tools.                  |
+| `brew_update.sh` | Updates Homebrew, upgrades packages, performs cleanup, and checks for known vulnerabilities. |
+| `aws_reset.sh`   | Resets the local AWS CLI environment by removing credentials and configuration.              |
+
+## Usage
 
 ```bash
 ./app_list.sh
-```
-
----
-
-### `brew_update.sh`
-
-Performs routine Homebrew maintenance.
-
-#### Actions
-
-- Updates Homebrew
-- Upgrades installed formulae
-- Upgrades installed casks
-- Removes outdated package versions (`brew cleanup`)
-- Scans installed packages for known vulnerabilities (`brew vuln`)
-- Lists packages that depend on vulnerable software
-
-#### Requirements
-
-- Homebrew
-
-#### Run
-
-```bash
 ./brew_update.sh
-```
-
----
-
-### `aws_reset.sh`
-
-Removes local AWS CLI credentials and configuration.
-
-#### Actions
-
-- Deletes `~/.aws`
-- Removes the AWS CLI cache
-- Removes the AWS CLI history file
-- Unsets AWS-related environment variables for the current shell
-- Removes AWS-related configuration from:
-  - `~/.zshrc`
-  - `~/.bash_profile`
-  - `~/.bashrc`
-  - `~/.profile`
-
-The script prompts for confirmation before making any changes.
-
-#### Run
-
-```bash
 ./aws_reset.sh
 ```
 
-Reload your shell after running:
-
-```bash
-source ~/.zshrc
-```
-
-Or simply open a new terminal session.
-
----
-
 ## Notes
 
-- `app_list.sh` uses `mdls` and scans `/Applications`, so it is intended for macOS.
-- **Caution:** `aws_reset.sh` resets your local AWS CLI environment by removing stored credentials and configuration. Review the script before running it, as the changes cannot be undone.
+* `app_list.sh` is intended for macOS.
+* `brew_update.sh` requires Homebrew.
+* **Caution:** `aws_reset.sh` resets your local AWS CLI environment. Review the script before running it.

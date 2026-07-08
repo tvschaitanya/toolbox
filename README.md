@@ -10,18 +10,17 @@ Generates a JSON inventory of installed software on your Mac.
 
 #### Detects
 
-* Mac App Store applications
-* Homebrew formulae
-* Homebrew casks
-* Manually installed applications
-* Development tools, including:
-
-  * Oh My Zsh
-  * NVM
-  * Node.js
-  * pyenv
-  * rbenv
-  * and others
+- Mac App Store applications
+- Homebrew formulae
+- Homebrew casks
+- Manually installed applications
+- Development tools, including:
+  - Oh My Zsh
+  - NVM
+  - Node.js
+  - pyenv
+  - rbenv
+  - and others
 
 #### Output
 
@@ -45,16 +44,16 @@ Performs routine Homebrew maintenance.
 
 #### Actions
 
-* Updates Homebrew
-* Upgrades installed formulae
-* Upgrades installed casks
-* Removes outdated package versions (`brew cleanup`)
-* Scans installed packages for known vulnerabilities (`brew vuln`)
-* Lists packages that depend on vulnerable software
+- Updates Homebrew
+- Upgrades installed formulae
+- Upgrades installed casks
+- Removes outdated package versions (`brew cleanup`)
+- Scans installed packages for known vulnerabilities (`brew vuln`)
+- Lists packages that depend on vulnerable software
 
 #### Requirements
 
-* Homebrew
+- Homebrew
 
 #### Run
 
@@ -70,16 +69,15 @@ Removes local AWS CLI credentials and configuration.
 
 #### Actions
 
-* Deletes `~/.aws`
-* Removes the AWS CLI cache
-* Removes the AWS CLI history file
-* Unsets AWS-related environment variables for the current shell
-* Removes AWS-related configuration from:
-
-  * `~/.zshrc`
-  * `~/.bash_profile`
-  * `~/.bashrc`
-  * `~/.profile`
+- Deletes `~/.aws`
+- Removes the AWS CLI cache
+- Removes the AWS CLI history file
+- Unsets AWS-related environment variables for the current shell
+- Removes AWS-related configuration from:
+  - `~/.zshrc`
+  - `~/.bash_profile`
+  - `~/.bashrc`
+  - `~/.profile`
 
 The script prompts for confirmation before making any changes.
 
@@ -99,41 +97,7 @@ Or simply open a new terminal session.
 
 ---
 
-## Requirements
-
-| Requirement | Used By                          |
-| ----------- | -------------------------------- |
-| macOS       | All scripts                      |
-| Zsh         | `app_list.sh`                    |
-| Bash        | `brew_update.sh`, `aws_reset.sh` |
-| Homebrew    | `app_list.sh`, `brew_update.sh`  |
-
----
-
-## Installation
-
-```bash
-git clone https://github.com/yourusername/toolbox.git
-cd toolbox
-
-chmod +x app_list.sh brew_update.sh aws_reset.sh
-```
-
----
-
-## Project Structure
-
-```text
-toolbox/
-├── app_list.sh
-├── brew_update.sh
-├── aws_reset.sh
-└── README.md
-```
-
----
-
 ## Notes
 
-* `app_list.sh` uses `mdls` and scans `/Applications`, so it is intended for macOS.
-* `aws_reset.sh` permanently removes local AWS CLI credentials and configuration. Back up `~/.aws` before running if you want to preserve existing profiles or credentials.
+- `app_list.sh` uses `mdls` and scans `/Applications`, so it is intended for macOS.
+- **Caution:** `aws_reset.sh` resets your local AWS CLI environment by removing stored credentials and configuration. Review the script before running it, as the changes cannot be undone.

@@ -1,0 +1,120 @@
+# Toolbox
+
+A small collection of Zsh/Bash scripts for managing a macOS environment. These scripts help you:
+
+- Inventory installed applications and development tools
+- Safely update Homebrew and check for vulnerable packages
+- Remove local AWS CLI credentials and configuration
+
+---
+
+## Scripts
+
+### `app_list.sh`
+
+Scans your Mac and generates a JSON inventory of installed software, including:
+
+- Mac App Store applications (detected via receipt metadata)
+- Homebrew formulae and casks
+- Shell-managed tools:
+  - Oh My Zsh
+  - NVM
+  - Node.js
+  - pyenv
+  - rbenv
+  - and others
+- Manually installed applications (not installed via the App Store or Homebrew)
+
+**Output**
+
+Creates a file named:
+
+```text
+Apps_List_YYYYMMDD.json
+```
+
+in the current directory.
+
+**Run**
+
+```bash
+./app_list.sh
+```
+
+---
+
+### `brew_update.sh`
+
+Performs a complete Homebrew maintenance cycle:
+
+- Updates Homebrew
+- Upgrades outdated formulae and casks
+- Removes old package versions with `brew cleanup`
+- Runs `brew vuln` to detect known vulnerabilities
+- Lists packages that depend on vulnerable software to help assess impact
+
+> **Requires:** Homebrew
+
+**Run**
+
+```bash
+./brew_update.sh
+```
+
+---
+
+### `aws_reset.sh`
+
+Removes local AWS CLI credentials and configuration by:
+
+- Deleting `~/.aws`
+- Removing the AWS CLI cache
+- Removing the AWS CLI history file
+- Unsetting AWS-related environment variables in the current shell
+- Removing AWS-related configuration lines from:
+  - `~/.zshrc`
+  - `~/.bash_profile`
+  - `~/.bashrc`
+  - `~/.profile`
+
+The script prompts for confirmation before making any changes.
+
+**Run**
+
+```bash
+./aws_reset.sh
+```
+
+After running, restart your terminal or reload your shell:
+
+```bash
+source ~/.zshrc
+```
+
+---
+
+## Requirements
+
+- macOS
+  - Uses `mdls` and scans `/Applications`
+- Zsh for `app_list.sh`
+- Bash for `brew_update.sh` and `aws_reset.sh`
+- Homebrew (required for `app_list.sh` and `brew_update.sh`)
+
+---
+
+## Setup
+
+```bash
+git clone https://github.com/yourusername/toolbox.git
+cd toolbox
+chmod +x app_list.sh brew_update.sh aws_reset.sh
+```
+
+---
+
+## Notes
+
+> **Warning**
+>
+> `aws_reset.sh` is destructive. Review the script before running it if you have AWS credentials or configuration that you want to keep.
